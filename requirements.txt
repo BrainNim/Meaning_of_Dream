@@ -3,3 +3,4 @@ awscli
 langchain
 faiss-cpu
 flask
+jq
