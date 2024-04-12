@@ -1,6 +1,12 @@
-boto3
-awscli
-langchain
-faiss-cpu
+# common
 flask
 jq
+tqdm
+
+# aws
+boto3
+awscli
+
+# llm
+langchain
+faiss-cpu

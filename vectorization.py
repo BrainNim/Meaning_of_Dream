@@ -1,38 +1,24 @@
-# document load
-from langchain_community.document_loaders import DirectoryLoader
-from langchain_community.document_loaders import TextLoader
-
-loader = DirectoryLoader('./sample_data/', glob="**/*.json",  # 디렉토리 위치, 파일 형식
-                         loader_cls=TextLoader,  # 기본적인 load 방식 설정
-                         loader_kwargs={'autodetect_encoding': True})  # utf8 인코딩 에러 해결
-document = loader.load()
-
-
+# common
+# import json
+# from pathlib import Path
+# from pprint import pprint
 
 # JSON Loader
+from langchain_community.document_loaders import DirectoryLoader
 from langchain_community.document_loaders import JSONLoader
 
-import json
-from pathlib import Path
-from pprint import pprint
-
-
-file_path='./data/물건/모자 꿈 수정.json'
-data = json.loads(Path(file_path).read_text())
-
-loader = JSONLoader(
-    file_path=file_path,
-    jq_schema='.[].content',
-    text_content=False)
-
+glob_condition = '**/*.json'
+loader = DirectoryLoader('./data', glob=glob_condition,  # 디렉토리 위치, 파일 형식
+                         loader_cls=JSONLoader,  # 기본적인 load 방식 설정
+                         loader_kwargs={'jq_schema':'.[].content'},  # utf8 인코딩 에러 해결
+                         show_progress=True)
 document = loader.load()
 
 
 # text split
 from langchain.text_splitter import CharacterTextSplitter
 text_splitter = CharacterTextSplitter(chunk_size=1000,  # 쪼개는 글자 수
-                                      chunk_overlap=0,  # 오버랩 글자 수
-                                      separator=',')    # 문서별 구분자
+                                      chunk_overlap=0,)  # 오버랩 글자 수
 docs = text_splitter.split_documents(document)
 
 
