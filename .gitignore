@@ -2,3 +2,9 @@ nohup.out
 
 /faiss_index
 /data
+
+*.pickle
+
+
+__pycache__
+*.pyc

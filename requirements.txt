@@ -2,6 +2,7 @@
 flask
 jq
 tqdm
+pandas
 
 # aws
 boto3
