@@ -43,15 +43,17 @@ bedrock_embeddings = BedrockEmbeddings(model_id='amazon.titan-embed-text-v1', cl
 
 
 # 벡터 임베딩
-start_num = 10
+start_num = 7748
 for i in tqdm(range(start_num, len(docs))):
     chunk_doc = [docs[i]]  # docs는 list형태여야 함
     if i == 0:
         vector = FAISS.from_documents(chunk_doc, bedrock_embeddings)
     else:
         add_to_store(docs=chunk_doc, original_store=vector, embeddings=bedrock_embeddings)
-    vector.save_local("faiss_index")  # 로컬에 저장
-    vector = FAISS.load_local("faiss_index", bedrock_embeddings, allow_dangerous_deserialization=True)  # 로컬에 저장한 벡터 불러오기
+
+    if i % 100 == 0:
+        vector.save_local("faiss_index")  # 로컬에 저장
+        vector = FAISS.load_local("faiss_index", bedrock_embeddings, allow_dangerous_deserialization=True)  # 로컬에 저장한 벡터 불러오기
 
 
 # 결과 확인
