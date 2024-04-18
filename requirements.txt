@@ -10,4 +10,5 @@ awscli
 
 # llm
 langchain
+langchain-community
 faiss-cpu
