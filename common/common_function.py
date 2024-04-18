@@ -18,3 +18,9 @@ def store_to_df(store):
 def add_to_store(docs, original_store, embeddings):
     extension = FAISS.from_documents(docs, embeddings)
     original_store.merge_from(extension)
+
+def delete_from_store(original_store, chunk_id_list):
+    print("before delete :", original_store.index.ntotal, "Documents")
+    # chunk_id_list = df[df.duplicated(['content'])]['chunk_id'].to_list()
+    original_store.delete(chunk_id_list)
+    print("after delete :", original_store.index.ntotal, "Documents")
