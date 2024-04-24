@@ -46,7 +46,6 @@ class ChatService:
                     
                     After finalising the above steps, you provide the user with an answer in the following format.
                     ```
-                    <?xml version="1.0" encoding="UTF-8"?>
                     <Response>
                         <title> (Summarise) </title>
                         <Interpret> (Interpret) </Interpret>
