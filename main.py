@@ -21,9 +21,8 @@ def chat():
 @app.route('/illustrate', methods=['POST'])
 def illustrate():
     params = request.json
-    response = IllustrateService().get_image(params)
+    result = IllustrateService().get_image(params)
 
-    result = json.dumps(response)
     return Response(result, mimetype='application/json')
 
 
