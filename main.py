@@ -3,13 +3,14 @@ import json
 from flask import Flask, request, Response
 
 from service.chat import ChatService
+from service.illust import IllustrateService
 
 app = Flask(__name__)
 chat_service = ChatService()
 
 # [POST] http://127.0.0.1:5000/chat
 @app.route('/chat', methods=['POST'])
-def generation():
+def chat():
     req_data = request.json
     question = req_data["requestContent"]
     response = chat_service.interpret_dream(question)
@@ -17,6 +18,13 @@ def generation():
     result = json.dumps(response)
     return Response(result, mimetype='application/json')
 
+@app.route('/illustrate', methods=['POST'])
+def illustrate():
+    params = request.json
+    response = IllustrateService().get_image(params)
+
+    result = json.dumps(response)
+    return Response(result, mimetype='application/json')
 
 
 if __name__ == '__main__':

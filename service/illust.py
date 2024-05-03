@@ -3,7 +3,7 @@ import requests
 from flask import abort
 
 
-class IllustService:
+class IllustrateService:
     def __init__(self):
         with open("key/dalle-api-key.txt", "r") as f:
             key = f.readline()
@@ -24,7 +24,7 @@ class IllustService:
             4:"Cheerful",
             3:"Neutral",
             2:"Sad",
-            1:"Dark and Gloomy"
+            1:"Gloomy"
         }
 
     def get_image(self, params):
@@ -48,9 +48,3 @@ class IllustService:
 
         image_url = response.json()['data'][0]['url']
         return image_url
-
-
-# service = IllustService()
-# params = {"situation": "I am a mother but I lost my son",
-#           "mood_stage": 1,}
-# response = service.get_image(params)
