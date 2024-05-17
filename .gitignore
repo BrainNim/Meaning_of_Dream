@@ -2,6 +2,7 @@ nohup.out
 
 /faiss_index
 /data
+/key
 
 *.pickle
 
