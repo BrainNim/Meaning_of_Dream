@@ -29,7 +29,7 @@ class IllustrateService:
 
     def get_image(self, params):
         situation = params['situation']
-        mood = self.mood_stage[params['mood_stage']]
+        mood = self.mood_stage[params['score']]
 
         # prompt
         prompt = f"""Illustrate only one tarot card in the style of Art Nouveau, inspired by early 20th century artwork, featuring ({situation}). 
