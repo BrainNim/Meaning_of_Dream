@@ -70,6 +70,6 @@ class ChatService:
                 | self.prompt
                 | llm
         )
-        print(vector.similarity_search(question, k=5))
+        print(vector.similarity_search(question, k=3))
         answer = chain.invoke(question)
         return answer
