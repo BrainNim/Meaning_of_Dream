@@ -77,5 +77,4 @@ class ChatService:
         )
         # print(vector.similarity_search(question, k=3))
         answer = chain.invoke(question)
-        print(answer.content)
         return answer.content
