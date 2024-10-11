@@ -1,5 +1,5 @@
 import boto3
-from langchain.llms.bedrock import Bedrock
+from langchain_aws import ChatBedrock  # bedrock 모델 사용
 from langchain.embeddings import BedrockEmbeddings  # bedrock 임베딩모델 사용
 from langchain_community.vectorstores import FAISS  # 벡터 저장
 
@@ -9,12 +9,17 @@ from langchain.schema.runnable import RunnablePassthrough
 
 # 모델명 지정
 embedding_model_id = 'amazon.titan-embed-text-v1'
-chat_model_id = 'anthropic.claude-v2:1'
+chat_model_id = 'anthropic.claude-3-5-sonnet-20240620-v1:0'
 
 # Bedrock & 모델 설정
 bedrock = boto3.client(service_name='bedrock-runtime')
 embeddings = BedrockEmbeddings(model_id=embedding_model_id, client=bedrock)
-llm = Bedrock(model_id=chat_model_id, client=bedrock)
+llm = ChatBedrock(
+    model_id="anthropic.claude-3-5-sonnet-20240620-v1:0",
+    model_kwargs=dict(temperature=0),
+    region_name='us-east-1'
+    # other params...
+)
 
 # 벡터 저장소 불러오기 & retriever 설정
 vector = FAISS.load_local("faiss_index", embeddings, allow_dangerous_deserialization=True)
@@ -70,6 +75,7 @@ class ChatService:
                 | self.prompt
                 | llm
         )
-        print(vector.similarity_search(question, k=3))
+        # print(vector.similarity_search(question, k=3))
         answer = chain.invoke(question)
-        return answer
+        print(answer.content)
+        return answer.content

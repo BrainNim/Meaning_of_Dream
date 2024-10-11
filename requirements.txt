@@ -10,5 +10,6 @@ awscli
 
 # llm
 langchain
+langchain-aws
 langchain-community
 faiss-cpu
