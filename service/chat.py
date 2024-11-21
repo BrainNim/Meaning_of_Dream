@@ -47,7 +47,7 @@ class ChatService:
                     1) Summarise: Summarise the content of user's <context> in one sentence. Not interpret. Focus on characters, objects and actions. (summarise step is the only one in English.)
                     2) Analyse: Analyse the actions, who is doing what, and what is being done in the story in the user's dream.
                     3) Select: From the contents of <context>, select two or three documents that best matches the context of the analysis.
-                    4) Interpretation: Interpret the user's dream based on the information in the analysed and selected documents. Not analyse the psychological things. just use the <context> and the result of selections. Answer in 100 words or less.
+                    4) Interpretation: Interpret the user's dream based on the information in the analysed and selected documents. Not analyse the psychological things. just use the <context> and the result of selections.
                     5) Scoring: Based on the interpretation result, the luckiness is scored on a 5-point scale. result's data type is integer.
                     6) Create Title: Create a title of 2-3 words based on user's dream and interpretation.
                     
